@@ -7,11 +7,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.akshay.leftshifttests.api.gitapi;
 import com.akshay.leftshifttests.model.gitmodel;
+import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.button)Button button;
     @Bind(R.id.editText)EditText edit_user;
     @Bind(R.id.progressBar)ProgressBar pbar;
+    @Bind(R.id.imageView)ImageView img;
 
     String API = "https://api.github.com";                         //BASE URL
 
@@ -54,8 +57,9 @@ public class MainActivity extends AppCompatActivity {
                     public void success(gitmodel gitmodel, Response response) {
                         //we get json object from github server to our POJO or model class
 
-                        tv.setText("Github Name :"+gitmodel.getName()+"\nWebsite :"+gitmodel.getBlog()+"\nCompany Name :"+gitmodel.getCompany());
+                        tv.setText("Github Name :"+gitmodel.getName()+"\nCreated At :"+gitmodel.getCreatedAt()+"\nCompany Name :"+gitmodel.getCompany());
 
+                        Picasso.with(getApplicationContext()).load(gitmodel.getAvatarUrl()).into(img);
                         pbar.setVisibility(View.INVISIBLE);                               //disable progressbar
                     }
 
