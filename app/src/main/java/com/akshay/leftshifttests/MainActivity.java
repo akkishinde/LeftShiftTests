@@ -1,5 +1,6 @@
 package com.akshay.leftshifttests;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.editText)EditText edit_user;
     @Bind(R.id.progressBar)ProgressBar pbar;
     @Bind(R.id.imageView)ImageView img;
+    @Bind(R.id.btnNext)Button btnNext;
 
     String API = "https://api.github.com";                         //BASE URL
 
@@ -52,12 +54,12 @@ public class MainActivity extends AppCompatActivity {
                 //Now ,we need to call for response
                 //Retrofit using gson for JSON-POJO conversion
 
-                git.getFeed(user,new Callback<gitmodel>() {
+                git.getFeed(user, new Callback<gitmodel>() {
                     @Override
                     public void success(gitmodel gitmodel, Response response) {
                         //we get json object from github server to our POJO or model class
 
-                        tv.setText("Github Name :"+gitmodel.getName()+"\nCreated At :"+gitmodel.getCreatedAt()+"\nCompany Name :"+gitmodel.getCompany());
+                        tv.setText("Github Name :" + gitmodel.getName() + "\nCreated At :" + gitmodel.getCreatedAt() + "\nCompany Name :" + gitmodel.getCompany());
 
                         Picasso.with(getApplicationContext()).load(gitmodel.getAvatarUrl()).into(img);
                         pbar.setVisibility(View.INVISIBLE);                               //disable progressbar
@@ -69,6 +71,15 @@ public class MainActivity extends AppCompatActivity {
                         pbar.setVisibility(View.INVISIBLE);                               //disable progressbar
                     }
                 });
+            }
+        });
+
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(MainActivity.this, SecondActivity.class);
+                startActivity(intent);
             }
         });
     }
