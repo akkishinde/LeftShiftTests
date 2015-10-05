@@ -3,5 +3,9 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+<<<<<<< HEAD
     <string name="title_activity_service">ServiceActivity</string>
+=======
+    <string name="title_activity_second">SecondActivity</string>
+>>>>>>> 0fba382b789eff7bebaf5a2bcbdef3c6d693e6fc
 </resources>
